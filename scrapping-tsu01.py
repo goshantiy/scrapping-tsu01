@@ -6,8 +6,8 @@ import schedule
 import time
 import re
 
-url = 'https://ria.ru/lenta/' 
-keywords = ['SpaceX', 'ИИ', 'AI', 'инопланетяне', 'пришельцы', 'космос', '3D', 'космический', '3Д', 'ученый', 'учёный', 'ученые', 'Microsoft','Apple', 'США']  
+url = 'https://ria.ru/lenta/'
+keywords = ['SpaceX', 'ИИ', 'AI', 'инопланетяне', 'пришельцы', 'космос', '3D', 'космический', '3Д', 'ученый', 'учёный', 'ученые', 'Microsoft','Apple', 'США']
 proxies_file_path = 'proxies.txt'
 agents_file_path = 'user_agents.txt'
 output_file = 'matched_articles.txt'
@@ -15,7 +15,7 @@ start_time = datetime.now()
 max_duration_hours = 24
 existing_urls = set()
 
-def read_proxies_from_file(file_path):
+def read_lines_from_file(file_path):
     proxies = []
     try:
         with open(file_path, 'r') as file:
@@ -25,18 +25,8 @@ def read_proxies_from_file(file_path):
      print(f"Failed to open or read the file: {file_path}, please specify name to proxies.txt")
     return proxies
 
-def read_user_agents_from_file(file_path):
-    user_agent = []
-    try:
-        with open(file_path, 'r') as file:
-            for line in file:
-                user_agent.append(line.strip())
-    except IOError:
-     print(f"Failed to open or read the file: {file_path}, please specify name to agents.txt")
-    return user_agent
-
-proxies = read_proxies_from_file(proxies_file_path)
-agents = read_proxies_from_file(agents_file_path)  
+proxies = read_lines_from_file(proxies_file_path)
+agents = read_lines_from_file(agents_file_path)
 
 def schedule_scrap_site(url):
     if(len(proxies)&len(agents)):
