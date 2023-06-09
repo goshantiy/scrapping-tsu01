@@ -29,7 +29,7 @@ proxies = read_lines_from_file(proxies_file_path)
 agents = read_lines_from_file(agents_file_path)
 
 def schedule_scrap_site(url):
-    if(len(proxies)&len(agents)):
+    if(len(proxies) and len(agents)):
         for proxy in proxies:
             try:
                 headers = {'User-Agent':random.choice(agents)}
@@ -58,11 +58,11 @@ def schedule_scrap_site(url):
                 print(f"Failed to connect using proxy: {proxy}")
 
 schedule_scrap_site(url)
-schedule.every(15).minutes.do(schedule_scrap_site, url)
+# schedule.every(15).minutes.do(schedule_scrap_site, url)
 
-while True:
-    elapsed_time = datetime.now() - start_time
-    if elapsed_time.total_seconds() / 3600 >= max_duration_hours:
-        break
-    schedule.run_pending()
-    time.sleep(1000)
+# while True:
+#     elapsed_time = datetime.now() - start_time
+#     if elapsed_time.total_seconds() / 3600 >= max_duration_hours:
+#         break
+#     schedule.run_pending()
+#     time.sleep(1000)
